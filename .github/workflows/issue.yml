@@ -11,26 +11,6 @@ jobs:
   issue-manager:
     runs-on: ubuntu-latest
     steps:
-      - run: |
-            gh api -i graphql -f query='
-            mutation {
-              createDiscussion(
-                input: {repositoryId: "R_kgDOG8xRxA", categoryId: "DIC_kwDOG8xRxM4CN9Zd",
-                  title: "${{github.event.issue.title}}", body: "${{github.event.issue.body}}"
-                }
-              )
-              {
-                discussion {
-                  id
-                  number
-                  title
-                }
-              }
-            }
-            '
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - uses: actions/checkout@v2
 
       - name: Change README.md
@@ -47,3 +27,25 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           force: true
+
+      ##################################################
+
+      - run: |
+            gh api -i graphql -f query='
+            mutation {
+              createDiscussion(
+                input: {repositoryId: "R_kgDOG8xRxA", categoryId: "DIC_kwDOG8xRxM4CN9Zd",
+                  title: "${{github.event.issue.title}}", body: "具体内容请看：${{github.event.issue.html_url}}"
+                }
+              )
+              {
+                discussion {
+                  id
+                  number
+                  title
+                }
+              }
+            }
+            '
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
