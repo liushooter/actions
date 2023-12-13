@@ -10,3 +10,4 @@
 - [Nervos 正在招聘 Developer Support Engineer](https://github.com/liushooter/actions/issues/20) 2022-03-06
 - [test a](https://github.com/liushooter/actions/issues/22) 2023-12-13
 - [hi](https://github.com/liushooter/actions/issues/23) 2023-12-13
+- [终于找到了 telegram id](https://github.com/liushooter/actions/issues/24) 2023-12-13
