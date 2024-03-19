@@ -17,7 +17,6 @@ jobs:
           path: |
             /home/runner/.local/share/solana/install/active_release/
             /home/codespace/.local/share/solana/install/active_release/
-            ~/.cache/solana
           key: ${{ runner.os }}-solana
 
       - name: install solana
@@ -39,3 +38,5 @@ jobs:
           solana balance
           solana airdrop 5 2>&1
           solana balance
+
+#  https://github.com/metaplex-foundation/actions/tree/main/install-solana
