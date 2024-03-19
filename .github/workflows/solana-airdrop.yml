@@ -9,14 +9,30 @@ jobs:
   airdrop-some-sol:
     runs-on: ubuntu-latest
     steps:
-      - name: install solana
-        uses: metaplex-foundation/actions/install-solana@v1
+      - name: cache solana
+        id: cache
+        if: inputs.cache == 'true'
+        uses: actions/cache@v3
         with:
-          version: stable
-          cache: true
+          path: |
+            /home/runner/.local/share/solana/install/active_release/
+            /home/codespace/.local/share/solana/install/active_release/
+            ~/.cache/solana
+          key: ${{ runner.os }}-solana
+
+      - name: install solana
+        if: inputs.cache != 'true' || steps.cache.outputs.cache-hit != 'true'
+        run: |
+          sh -c "$(curl -sSfL https://release.solana.com/stable/install)"
+          export PATH="/home/runner/.local/share/solana/install/active_release/bin:$PATH"
+          export PATH="/home/codespace/.local/share/solana/install/active_release/bin:$PATH"
+          solana -V
 
       - name: airdrop solana
         run: |
+          export PATH="/home/runner/.local/share/solana/install/active_release/bin:$PATH"
+          export PATH="/home/codespace/.local/share/solana/install/active_release/bin:$PATH"
+
           solana -V
           echo ${{ secrets.SOLANA_PRIV_KEY }} > ~/.config/solana/id.json
           solana config set --url https://api.devnet.solana.com
