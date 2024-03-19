@@ -9,16 +9,17 @@ jobs:
   airdrop-some-sol:
     runs-on: ubuntu-latest
     steps:
-      - name: Install solana
+      - name: install solana
+        uses: metaplex-foundation/actions/install-solana@v1
+        with:
+          version: stable
+          cache: true
+
+      - name: airdrop solana
         run: |
-          sh -c "$(curl -sSfL https://release.solana.com/stable/install)"
           solana -V
-          export PATH="/home/runner/.local/share/solana/install/active_release/bin:$PATH"
-          export PATH="/home/codespace/.local/share/solana/install/active_release/bin:$PATH"
-          echo secrets.SOLANA_PRIV_KEY > ~/.config/solana/id.json
+          echo ${{ secrets.SOLANA_PRIV_KEY }} > ~/.config/solana/id.json
           solana config set --url https://api.devnet.solana.com
-      - name: airdrop
-        run: |
           solana balance
           solana airdrop 5 2>&1
           solana balance
