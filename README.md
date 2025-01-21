@@ -12,3 +12,4 @@
 - [hi](https://github.com/liushooter/actions/issues/23) 2023-12-13
 - [终于找到了 telegram id](https://github.com/liushooter/actions/issues/24) 2023-12-13
 - [私有群能发消息么](https://github.com/liushooter/actions/issues/25) 2023-12-13
+- [GitHub Developers Event](https://github.com/liushooter/actions/issues/26) 2025-01-21
